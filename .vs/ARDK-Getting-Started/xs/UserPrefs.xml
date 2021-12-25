@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{6B3127F6-B9B4-E6C4-990B-267AA5E81767}|">
+  <MonoDevelop.Ide.ItemProperties.ARDK PreferredExecutionTarget="439f032e-2fdc-43cb-887c-ccc76ea63844" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SemanticTutorial.cs">
+    <Files>
+      <File FileName="Assets/Scripts/QuerySemantics.cs" Line="68" Column="94" />
+      <File FileName="Assets/Scenes/SemanticSh.shader" Line="29" Column="14" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ARDK-Getting-Started" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
