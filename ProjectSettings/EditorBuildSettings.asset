@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/ARDKExamples/ContextAwareness/Meshing/Meshing.unity
     guid: 5f23a8470b465422cb097c10aa71e80d
   - enabled: 0
-    path: Assets/Scenes/Segmentation.unity
+    path: Assets/Scenes/Segmentation/Segmentation.unity
     guid: 730f2e5d152784c3792ac99d8ae13637
   - enabled: 0
     path: Assets/ARDKExamples/ContextAwareness/Depth/Suppression.unity
