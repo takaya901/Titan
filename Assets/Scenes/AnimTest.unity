@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449579519413058, guid: 93e67935d04204a46bd6f78173df0a09, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 4449579519413058, guid: 93e67935d04204a46bd6f78173df0a09, type: 3}
       propertyPath: m_LocalPosition.y
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56141b7f5cbe41ad95b1ac477f93996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stonePrefab: {fileID: 8530169643222928, guid: 6f89b5f3712bb4110a7b2f37af11032b,
+  _stonePrefab: {fileID: 2266613282431719554, guid: 7ad47d15545514b4b98c6c0f68ae491a,
     type: 3}
 --- !u!1001 &793973888214635304
 PrefabInstance:
@@ -472,6 +472,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mutant2
       objectReference: {fileID: 0}
+    - target: {fileID: 793973886932190323, guid: 16d2013c9fa594f8ca76d22b3c0a1218,
+        type: 3}
+      propertyPath: _stonePrefab
+      value: 
+      objectReference: {fileID: 8530169643222928, guid: 6f89b5f3712bb4110a7b2f37af11032b,
+        type: 3}
     - target: {fileID: 795955810923531002, guid: 16d2013c9fa594f8ca76d22b3c0a1218,
         type: 3}
       propertyPath: m_RootOrder
