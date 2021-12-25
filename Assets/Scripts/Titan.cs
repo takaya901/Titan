@@ -22,8 +22,10 @@ public class Titan : MonoBehaviour
 
     void ThrowStone()
     {
-        _anim.SetTrigger("Throw");
-        _anim.SetTrigger("Idle");
+        _anim.SetBool("Attack", true);
+        //_anim.SetBool("Attack", false);
+        //_anim.SetTrigger("Throw");
+        //_anim.SetTrigger("Idle");
         var initPos = transform.position + new Vector3(0f, transform.localScale.y*0.8f, 0f);
         var stone = Instantiate(_stonePrefab, initPos, Quaternion.identity);
     }

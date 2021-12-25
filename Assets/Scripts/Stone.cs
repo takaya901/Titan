@@ -5,15 +5,19 @@ using UnityEngine;
 public class Stone : MonoBehaviour
 {
     [SerializeField] float _flightTime = 1f;
+    Vector3 _endPos;
 
     void Start()
     {
-        StartCoroutine(Throw(Camera.main.transform.position + Vector3.forward));
+        _endPos = Camera.main.transform.position + Vector3.forward;
+        StartCoroutine(Throw(_endPos));
     }
 
     void Update()
     {
-        
+        if (transform.position == _endPos){
+            Destroy(gameObject);
+        }
     }
 
     // https://www.gocca.work/unity-parabolic-movement/
