@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NativeUtil;
 
 public class Stone : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Stone : MonoBehaviour
     void Update()
     {
         if (transform.position == _endPos){
+            AndroidUtil.Vibrate(100);
             Destroy(gameObject);
         }
     }

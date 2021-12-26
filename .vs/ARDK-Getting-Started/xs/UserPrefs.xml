@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{6B3127F6-B9B4-E6C4-990B-267AA5E81767}|">
   <MonoDevelop.Ide.ItemProperties.ARDK PreferredExecutionTarget="08743199-4f0d-406c-b837-82a9f312644b" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AndroidUtil.cs">
     <Files>
-      <File FileName="Assets/Scripts/Titan.cs" Line="33" Column="12" />
-      <File FileName="Assets/Scripts/Stone.cs" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Titan.cs" Line="16" Column="18" />
+      <File FileName="Assets/Scripts/Stone.cs" Line="21" Column="6" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="11" Column="1" />
+      <File FileName="Assets/Scripts/AndroidUtil.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +13,7 @@
           <Node name="ARDK-Getting-Started" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="GameController.cs" selected="True" />
+                <Node name="AndroidUtil.cs" selected="True" />
               </Node>
             </Node>
           </Node>
