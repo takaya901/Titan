@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{6B3127F6-B9B4-E6C4-990B-267AA5E81767}|">
-  <MonoDevelop.Ide.ItemProperties.ARDK PreferredExecutionTarget="08743199-4f0d-406c-b837-82a9f312644b" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Stone.cs">
+  <MonoDevelop.Ide.ItemProperties.ARDK PreferredExecutionTarget="415f03c9-ae76-4a5e-b389-1147dc923fc2" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Shooter.cs">
     <Files>
-      <File FileName="Assets/Scripts/Titan.cs" Line="16" Column="18" />
-      <File FileName="Assets/Scripts/Stone.cs" Line="20" Column="38" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="11" Column="1" />
-      <File FileName="Assets/Scripts/AndroidUtil.cs" Line="28" Column="16" />
+      <File FileName="Assets/Scripts/Titan.cs" Line="55" Column="52" />
+      <File FileName="Assets/Scripts/GameController.cs" />
+      <File FileName="Assets/Scripts/Shooter.cs" Line="26" Column="76" />
+      <File FileName="Assets/Scripts/Stone.cs" Line="11" Column="80" />
+      <File FileName="Assets/Scripts/Bullet.cs" Line="11" Column="43" />
+      <File FileName="Assets/Scripts/IDamagable.cs" Line="5" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,7 +15,7 @@
           <Node name="ARDK-Getting-Started" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="Stone.cs" selected="True" />
+                <Node name="Shooter.cs" selected="True" />
               </Node>
             </Node>
           </Node>
