@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Input;
 
-public class Shooter : MonoBehaviour
+public class Shooter : MonoBehaviour, IDamagable
 {
     [SerializeField] GameObject _bulletPrefab;
 
@@ -39,5 +39,10 @@ public class Shooter : MonoBehaviour
             Debug.Log("no hit");
             bullet.GetComponent<PlayerBullet>().TargetPos = transform.forward * 30f;
         }
+    }
+
+    public void TakeDamage()
+    {
+
     }
 }

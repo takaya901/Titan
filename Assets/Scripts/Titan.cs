@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Input;
 
-public class Titan : MonoBehaviour
+public class Titan : MonoBehaviour, IDamagable
 {
     [SerializeField] float _moveSpeed = 0.1f;
     [SerializeField] MoveType _moveType;
@@ -82,6 +82,13 @@ public class Titan : MonoBehaviour
         _anim.SetTrigger("Attack");
         var initPos = transform.position + new Vector3(0f, transform.localScale.y*0.8f, 0f);
         var stone = Instantiate(_stonePrefab, initPos, Quaternion.identity);
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log("damage");
+        _anim = gameObject.GetComponent<Animator>();
+        _anim.SetTrigger("Hit");
     }
 
     enum MoveType

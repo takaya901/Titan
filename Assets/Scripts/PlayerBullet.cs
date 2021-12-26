@@ -15,6 +15,7 @@ public class PlayerBullet : Bullet
         // 爆発
         var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 2f);
+        GetComponent<AudioSource>().Play();
         base.OnTriggerEnter(other);
     }
 }

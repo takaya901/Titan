@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using NativeUtil;
 
-public class Stone : Bullet
+public class Stone : Bullet, IDamagable
 {
     new void Start()
     {
         base.Start();
         TargetPos = Camera.main.transform.position + new Vector3(0f, 0f, 0.5f);
+        _audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -18,6 +19,12 @@ public class Stone : Bullet
     {
         if (!other.CompareTag("Player")) { return; }
         AndroidUtil.Vibrate(100);
+        _audioSource.Play();
         base.OnTriggerEnter(other);
+    }
+
+    public void TakeDamage()
+    {
+        Destroy(gameObject);
     }
 }
