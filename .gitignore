@@ -8,8 +8,10 @@
 [Ll]ogs/
 
 Assets/Example
+Assets/Audio
 Assets/AssetStoreTools/
 Assets/ARDK*/
+Assets/Plugins/
 [Ii]cons/
 *.apk
 

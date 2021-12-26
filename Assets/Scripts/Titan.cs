@@ -11,6 +11,12 @@ public class Titan : MonoBehaviour
     void Start()
     {
         _anim = gameObject.GetComponent<Animator>();
+
+        // カメラに向くようにY軸のみ回転
+        var lookRotation = Quaternion.LookRotation(Camera.main.transform.position - transform.position, Vector3.up);
+        lookRotation.z = 0;
+        lookRotation.x = 0;
+        transform.rotation = lookRotation;
     }
 
     void Update()

@@ -6,20 +6,20 @@ using NativeUtil;
 public class Stone : MonoBehaviour
 {
     [SerializeField] float _flightTime = 1f;
+    [SerializeField] Material _transparent;
     Vector3 _endPos;
+    AudioSource _audioSource;
 
     void Start()
     {
-        _endPos = Camera.main.transform.position + Vector3.forward;
+        _audioSource = GetComponent<AudioSource>();
+        _endPos = Camera.main.transform.position + new Vector3(0f, 0f, 0.5f);
         StartCoroutine(Throw(_endPos));
     }
 
     void Update()
     {
-        if (transform.position == _endPos){
-            AndroidUtil.Vibrate(100);
-            Destroy(gameObject);
-        }
+
     }
 
     // https://www.gocca.work/unity-parabolic-movement/
@@ -42,5 +42,16 @@ public class Stone : MonoBehaviour
         }
         // 終点座標へ補正
         transform.position = endPos;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("MainCamera"))
+        {
+            gameObject.GetComponent<Renderer>().material = _transparent;
+            _audioSource.Play();
+            AndroidUtil.Vibrate(100);
+            Destroy(gameObject, 1f);
+        }
     }
 }
