@@ -32,12 +32,12 @@ public class Shooter : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 Debug.Log("hit");
-                bullet.GetComponent<Bullet>().TargetPos = hit.point;
+                bullet.GetComponent<PlayerBullet>().TargetPos = hit.point;
             }
         }
         else {
             Debug.Log("no hit");
-            bullet.GetComponent<Bullet>().TargetPos = transform.forward * 30f;
+            bullet.GetComponent<PlayerBullet>().TargetPos = transform.forward * 30f;
         }
     }
 }

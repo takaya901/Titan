@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NativeUtil;
 
 public class Bullet : MonoBehaviour
 {
@@ -42,6 +43,16 @@ public class Bullet : MonoBehaviour
         }
         // 終点座標へ補正
         transform.position = targetPos;
+    }
+
+    /// <summary>
+    /// プレイヤーにヒットした時
+    /// </summary>
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        gameObject.GetComponent<Renderer>().material = _transparent;
+        _audioSource.Play();
+        Destroy(gameObject, 1f);
     }
 
     enum Owner

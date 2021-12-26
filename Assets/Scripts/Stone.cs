@@ -14,14 +14,10 @@ public class Stone : Bullet
     /// <summary>
     /// プレイヤーにヒットした時
     /// </summary>
-    void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            gameObject.GetComponent<Renderer>().material = _transparent;
-            _audioSource.Play();
-            AndroidUtil.Vibrate(100);
-            Destroy(gameObject, 1f);
-        }
+        if (!other.CompareTag("Player")) { return; }
+        AndroidUtil.Vibrate(100);
+        base.OnTriggerEnter(other);
     }
 }
