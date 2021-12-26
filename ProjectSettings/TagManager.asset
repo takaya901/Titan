@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BlueGoal
   - RedGoal
+  - Enemy
   layers:
   - Default
   - TransparentFX

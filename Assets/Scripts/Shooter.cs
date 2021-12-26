@@ -22,32 +22,22 @@ public class Shooter : MonoBehaviour
 
     void Shoot()
     {
-        //// レーザー（ray）を飛ばす「起点」と「方向」
-        //Ray ray = new Ray(transform.position, transform.forward);
-        //RaycastHit hit;
-
-        //if (Physics.Raycast(ray, out hit, 60))
-        //{
-        //    var hitName = hit.transform.gameObject.tag;
-
-        //    if (hitName == "Enemy")
-        //    {
-        //        // 照準器の色を「赤」に変える（色は自由に変更してください。）
-        //        aimImage.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
-        //    }
-        //    else
-        //    {
-        //        // 照準器の色を「水色」（色は自由に変更してください。）
-        //        aimImage.color = new Color(0.0f, 1.0f, 1.0f, 1.0f);
-        //    }
-        //}
-        //else
-        //{
-        //    // 照準器の色を「水色」（色は自由に変更してください。）
-        //    aimImage.color = new Color(0.0f, 1.0f, 1.0f, 1.0f);
-        //}
-
         var bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().TargetPos = new Vector3(0f, 0f, 20f);
+        // レーザー（ray）を飛ばす「起点」と「方向」
+        Ray ray = new Ray(transform.position, transform.forward);
+        var distance = 100f;
+        //Debug.DrawLine(ray.origin, ray.direction * distance, Color.red, 5f);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, distance)) {
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                Debug.Log("hit");
+                bullet.GetComponent<Bullet>().TargetPos = hit.point;
+            }
+        }
+        else {
+            Debug.Log("no hit");
+            bullet.GetComponent<Bullet>().TargetPos = transform.forward * 30f;
+        }
     }
 }
