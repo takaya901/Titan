@@ -19,6 +19,9 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        if (transform.position == TargetPos) {
+            Destroy(gameObject);
+        }
     }
 
     // https://www.gocca.work/unity-parabolic-movement/
@@ -50,9 +53,10 @@ public class Bullet : MonoBehaviour
     /// </summary>
     protected virtual void OnTriggerEnter(Collider other)
     {
-        gameObject.GetComponent<Renderer>().material = _transparent;
+        //gameObject.GetComponent<Renderer>().material = _transparent;
         //_audioSource.Play();
-        other.transform.root.GetComponent<IDamagable>().TakeDamage();  //ヒットした相手の被弾処理
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
         Destroy(gameObject, 1f);
     }
 

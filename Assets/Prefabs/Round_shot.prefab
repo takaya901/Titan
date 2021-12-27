@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -1801145982905050035}
   - component: {fileID: 1175549626488079151}
   - component: {fileID: 2746247697759210612}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Round_shot
   m_TagString: Player
   m_Icon: {fileID: 0}

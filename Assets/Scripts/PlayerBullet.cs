@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBullet : Bullet
+public class PlayerBullet : Bullet, IDamagable
 {
     [SerializeField] GameObject _explosionPrefab;
 
@@ -12,10 +12,15 @@ public class PlayerBullet : Bullet
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) { return; }
+        other.transform.root.GetComponent<IDamagable>().TakeDamage();  //ヒットした相手の被弾処理
         // 爆発
         var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 2f);
         GetComponent<AudioSource>().Play();
         base.OnTriggerEnter(other);
+    }
+
+    public void TakeDamage()
+    {
     }
 }

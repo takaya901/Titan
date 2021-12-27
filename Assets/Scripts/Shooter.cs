@@ -28,12 +28,9 @@ public class Shooter : MonoBehaviour, IDamagable
         var distance = 100f;
         //Debug.DrawLine(ray.origin, ray.direction * distance, Color.red, 5f);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, distance)) {
-            if (hit.collider.CompareTag("Enemy"))
-            {
-                Debug.Log("hit");
-                bullet.GetComponent<PlayerBullet>().TargetPos = hit.point;
-            }
+        if (Physics.Raycast(ray, out RaycastHit hit, distance) && hit.collider.CompareTag("Enemy")) {
+            Debug.Log("hit");
+            bullet.GetComponent<PlayerBullet>().TargetPos = hit.point;
         }
         else {
             Debug.Log("no hit");

@@ -18,6 +18,7 @@ public class Stone : Bullet, IDamagable
     protected override void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) { return; }
+        other.GetComponent<IDamagable>().TakeDamage();  //ヒットした相手の被弾処理
         AndroidUtil.Vibrate(100);
         _audioSource.Play();
         base.OnTriggerEnter(other);
