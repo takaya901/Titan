@@ -14,6 +14,7 @@ public class Titan : MonoBehaviour, IDamagable
     Vector2 _touchEnd;       //タッチ終了時座標
     Animator _anim;
     AudioSource _screaming;
+    bool _isDead;
 
     void Start()
     {
@@ -29,6 +30,8 @@ public class Titan : MonoBehaviour, IDamagable
 
     void Update()
     {
+        if (_isDead) return;
+
         Move();
         if (GetKeyDown("space") || touchCount > 0){
             ThrowStone();
@@ -95,6 +98,7 @@ public class Titan : MonoBehaviour, IDamagable
         // HPが0になったら死ぬ
         if (--_Hp == 0)
         {
+            _isDead = true;
             _anim.SetTrigger("Die");
             _screaming.Play();
             Destroy(gameObject, 3f);

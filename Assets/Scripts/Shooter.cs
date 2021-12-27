@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Input;
 
-public class Shooter : MonoBehaviour, IDamagable
+public class Shooter : MonoBehaviour
 {
     [SerializeField] GameObject _bulletPrefab;
 
@@ -17,12 +17,12 @@ public class Shooter : MonoBehaviour, IDamagable
         if (GetKeyDown("space") || touchCount > 0){
             Shoot();
         }
-
     }
 
     void Shoot()
     {
         var bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+
         // レーザー（ray）を飛ばす「起点」と「方向」
         Ray ray = new Ray(transform.position, transform.forward);
         var distance = 100f;
@@ -36,10 +36,5 @@ public class Shooter : MonoBehaviour, IDamagable
             Debug.Log("no hit");
             bullet.GetComponent<PlayerBullet>().TargetPos = transform.forward * 30f;
         }
-    }
-
-    public void TakeDamage()
-    {
-
     }
 }
