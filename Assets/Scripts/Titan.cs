@@ -16,26 +16,61 @@ public class Titan : MonoBehaviour, IDamagable
     AudioSource _screaming;
     bool _isDead;
 
+    bool _isWalking;
+    Vector3 _walkDestination;
+
     void Start()
     {
         _anim = gameObject.GetComponent<Animator>();
         _screaming = GetComponent<AudioSource>();
 
         // カメラに向くようにY軸のみ回転
-        var lookRotation = Quaternion.LookRotation(Camera.main.transform.position - transform.position, Vector3.up);
-        lookRotation.z = 0;
-        lookRotation.x = 0;
-        transform.rotation = lookRotation;
+        transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
     }
 
     void Update()
     {
         if (_isDead) return;
+        Walk();
 
-        Move();
+        //Move();
         if (GetKeyDown("space") || touchCount > 0){
             ThrowStone();
         }
+    }
+
+    /// <summary>
+    /// ランダムに左右に歩いたり止まったり
+    /// </summary>
+    void Walk()
+    {
+        // 目的地を設定
+        if (!_isWalking)
+        {
+            _isWalking = true;
+            var targetX = Random.Range(-30f, 30f);
+            Debug.Log(targetX);
+            _walkDestination = new Vector3(targetX, transform.position.y, transform.position.z);
+            transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
+            _anim.SetTrigger("Walk");
+            return;
+        }
+
+        // 目的地に到達したとき
+        if (transform.position == _walkDestination){
+            _isWalking = false;
+            return;
+        }
+
+        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name != "attack(2)")
+        {
+            transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
+        }
+        else
+        {
+            transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
+        }
+        transform.position = Vector3.MoveTowards(transform.position, _walkDestination, Time.deltaTime);
     }
 
     /// <summary>
@@ -86,6 +121,7 @@ public class Titan : MonoBehaviour, IDamagable
     void ThrowStone()
     {
         _anim.SetTrigger("Attack");
+        transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
         var initPos = transform.position + new Vector3(0f, transform.localScale.y*0.8f, 0f);
         var stone = Instantiate(_stonePrefab, initPos, Quaternion.identity);
     }
