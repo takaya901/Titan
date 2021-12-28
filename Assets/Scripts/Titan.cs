@@ -8,7 +8,8 @@ using static UnityEngine.Input;
 /// </summary>
 public class Titan : MonoBehaviour, IDamagable
 {
-    [SerializeField] int _Hp = 10;
+    [SerializeField] int _hp = 10;
+    [SerializeField] float _speed = 10f;
     [SerializeField] float _moveSpeed = 0.1f;
     [SerializeField] MoveType _moveType;
     [SerializeField] GameObject _stonePrefab;
@@ -17,9 +18,9 @@ public class Titan : MonoBehaviour, IDamagable
     Vector2 _touchEnd;       //タッチ終了時座標
     Animator _anim;
     AudioSource _screaming;
+    /// <summary> HPが0になってから死に声再生終わるまでtrue </summary>
     bool _isDead;
 
-    bool _isWalking;
     Vector3 _walkDestination;
 
     void Start()
@@ -27,6 +28,7 @@ public class Titan : MonoBehaviour, IDamagable
         _anim = gameObject.GetComponent<Animator>();
         _screaming = GetComponent<AudioSource>();
 
+        _walkDestination = transform.position;
         // カメラに向くようにY軸のみ回転
         transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
 
@@ -46,31 +48,24 @@ public class Titan : MonoBehaviour, IDamagable
     /// </summary>
     void Walk()
     {
-        // 目的地を設定
-        if (!_isWalking)
+        // 次の目的地を設定
+        if (transform.position == _walkDestination)
         {
-            _isWalking = true;
             var targetX = Random.Range(-30f, 30f);
-            Debug.Log(targetX);
             _walkDestination = new Vector3(targetX, transform.position.y, transform.position.z);
             transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
             _anim.SetTrigger("Walk");
             return;
         }
 
-        // 目的地に到達したとき
-        if (transform.position == _walkDestination){
-            _isWalking = false;
-            return;
-        }
-
-        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Attack")　{
-            transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
-        }
-        else {
+        // 攻撃アニメーション中は移動しない
+        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack") {
             transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
         }
-        transform.position = Vector3.MoveTowards(transform.position, _walkDestination, Time.deltaTime);
+        else {
+            transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
+            transform.position = Vector3.MoveTowards(transform.position, _walkDestination, Time.deltaTime * _speed);
+        }
     }
 
     /// <summary>
@@ -118,7 +113,9 @@ public class Titan : MonoBehaviour, IDamagable
         }
     }
 
-    // ランダムな時間間隔で攻撃
+    /// <summary>
+    /// ランダムな時間間隔で攻撃
+    /// </summary>
     IEnumerator Attack()
     {
         while (true)
@@ -139,11 +136,12 @@ public class Titan : MonoBehaviour, IDamagable
 
     public void TakeDamage()
     {
+        if (_isDead) return;    //Die中にHitアニメーション再生しないように
         _anim = gameObject.GetComponent<Animator>();
 
-        Debug.Log(_Hp);
+        Debug.Log(_hp);
         // HPが0になったら死ぬ
-        if (--_Hp == 0)
+        if (--_hp == 0)
         {
             _isDead = true;
             _anim.SetTrigger("Die");
