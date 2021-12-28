@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Input;
 
+/// <summary>
+/// 横方向にランダム移動、ランダムな間隔で攻撃
+/// </summary>
 public class Titan : MonoBehaviour, IDamagable
 {
     [SerializeField] int _Hp = 10;
@@ -26,6 +29,8 @@ public class Titan : MonoBehaviour, IDamagable
 
         // カメラに向くようにY軸のみ回転
         transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
+
+        StartCoroutine("Attack");
     }
 
     void Update()
@@ -34,9 +39,6 @@ public class Titan : MonoBehaviour, IDamagable
         Walk();
 
         //Move();
-        if (GetKeyDown("space") || touchCount > 0){
-            ThrowStone();
-        }
     }
 
     /// <summary>
@@ -62,12 +64,10 @@ public class Titan : MonoBehaviour, IDamagable
             return;
         }
 
-        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name != "attack(2)")
-        {
+        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name != "attack(2)")　{
             transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
         }
-        else
-        {
+        else {
             transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
         }
         transform.position = Vector3.MoveTowards(transform.position, _walkDestination, Time.deltaTime);
@@ -115,6 +115,16 @@ public class Titan : MonoBehaviour, IDamagable
         {
             _touchStart = Vector2.zero;
             _touchEnd = Vector2.zero;
+        }
+    }
+
+    // ランダムな時間間隔で攻撃
+    IEnumerator Attack()
+    {
+        while (true)
+        {
+            ThrowStone();
+            yield return new WaitForSeconds(Random.Range(3f, 10f));
         }
     }
 

@@ -6,7 +6,6 @@ using NativeUtil;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float _flightTime = 4f;
-    [SerializeField] protected Material _transparent;
     protected AudioSource _audioSource;
 
     public Vector3 TargetPos { get; set; }
