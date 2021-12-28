@@ -6,14 +6,10 @@ using UnityEngine.UI;
 public class HpGauge : MonoBehaviour
 {
     Image _gauge;
-    public float _t;
-    float _maxValue;
 
     void Start()
     {
         _gauge = GetComponent<Image>();
-        _maxValue = 1f;
-        _t = 1f;
     }
 
     public void DecreaseValue(float hpRatio)

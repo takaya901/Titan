@@ -64,7 +64,7 @@ public class Titan : MonoBehaviour, IDamagable
             return;
         }
 
-        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name != "attack(2)")　{
+        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Attack")　{
             transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
         }
         else {
@@ -123,6 +123,7 @@ public class Titan : MonoBehaviour, IDamagable
     {
         while (true)
         {
+            if (_isDead) break;
             ThrowStone();
             yield return new WaitForSeconds(Random.Range(3f, 10f));
         }
