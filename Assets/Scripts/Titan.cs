@@ -13,6 +13,7 @@ public class Titan : MonoBehaviour, IDamagable
     [SerializeField] float _moveSpeed = 0.1f;
     [SerializeField] MoveType _moveType;
     [SerializeField] GameObject _stonePrefab;
+    [SerializeField] BulletType _bulletType;
 
     Vector2 _touchStart;     //タッチ開始時座標
     Vector2 _touchEnd;       //タッチ終了時座標
@@ -119,7 +120,6 @@ public class Titan : MonoBehaviour, IDamagable
     {
         while (true)
         {
-            if (_isDead) break;
             yield return new WaitForSeconds(Random.Range(3f, 10f));
             ThrowStone();
         }
@@ -127,20 +127,23 @@ public class Titan : MonoBehaviour, IDamagable
 
     void ThrowStone()
     {
+        if (_isDead) return;
+
         _anim.SetTrigger("Attack");
         transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
         var initPos = transform.position + new Vector3(0f, transform.localScale.y*0.8f, 0f);
         var stone = Instantiate(_stonePrefab, initPos, Quaternion.identity);
+        stone.GetComponent<Stone>().Type = _bulletType;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(BulletType bulletType)
     {
         if (_isDead) return;    //Die中にHitアニメーション再生しないように
-        _anim = gameObject.GetComponent<Animator>();
+        if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Get_hit") return;  //被弾モーション中は無敵
 
         Debug.Log(_hp);
         // HPが0になったら死ぬ
-        if (--_hp == 0)
+        if (--_hp <= 0)
         {
             _isDead = true;
             _anim.SetTrigger("Die");

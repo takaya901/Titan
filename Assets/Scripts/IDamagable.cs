@@ -1,4 +1,4 @@
 ﻿public interface IDamagable
 {
-    void TakeDamage();
+    void TakeDamage(BulletType bulletType);
 }

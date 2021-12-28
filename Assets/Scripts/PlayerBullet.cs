@@ -12,14 +12,14 @@ public class PlayerBullet : Bullet, IDamagable
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) { return; }
-        other.transform.root.GetComponent<IDamagable>().TakeDamage();  //ヒットした相手の被弾処理
+        other.transform.root.GetComponent<IDamagable>().TakeDamage(Type);  //ヒットした相手の被弾処理
         // 爆発
         var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 2f);
         base.OnTriggerEnter(other);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(BulletType bulletType)
     {
     }
 }

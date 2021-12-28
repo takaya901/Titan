@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float _flightTime = 4f;
     protected AudioSource _audioSource;
 
+    public BulletType Type { get; set; }
     public Vector3 TargetPos { get; set; }
 
     protected void Start()
@@ -64,4 +65,11 @@ public class Bullet : MonoBehaviour
         Player,
         Enemy
     }
+}
+
+public enum BulletType
+{
+    Player,
+    Stone,
+    Poison
 }

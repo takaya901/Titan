@@ -6,6 +6,7 @@ public class Player : MonoBehaviour, IDamagable
 {
     [SerializeField] int _maxHp = 10;
     [SerializeField] HpGauge _hpGauge;
+    [SerializeField] FlushOnDamaged _flushOnDamaged;
     int _currentHp;
 
     void Start()
@@ -18,9 +19,10 @@ public class Player : MonoBehaviour, IDamagable
 
     }
 
-    public void TakeDamage()
+    public void TakeDamage(BulletType bulletType)
     {
         _currentHp--;
         _hpGauge.DecreaseValue(_currentHp / (float)_maxHp);
+        _flushOnDamaged.Flush(bulletType);
     }
 }

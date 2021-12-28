@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Utils
 {
+    /// <summary>
+    /// ターゲットに向くようにY軸のみ回転
+    /// </summary>
     public static Quaternion LookRotationY(Vector3 source, Vector3 target)
     {
         var lookRotation = Quaternion.LookRotation(target - source, Vector3.up);
