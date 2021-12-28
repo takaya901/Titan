@@ -20,7 +20,6 @@ public class Titan : MonoBehaviour, IDamagable
     AudioSource _screaming;
     /// <summary> HPが0になってから死に声再生終わるまでtrue </summary>
     bool _isDead;
-
     Vector3 _walkDestination;
 
     void Start()
@@ -121,8 +120,8 @@ public class Titan : MonoBehaviour, IDamagable
         while (true)
         {
             if (_isDead) break;
-            ThrowStone();
             yield return new WaitForSeconds(Random.Range(3f, 10f));
+            ThrowStone();
         }
     }
 
