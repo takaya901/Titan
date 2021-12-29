@@ -24,7 +24,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         // HPが0になったらゲームオーバー
         if (--_currentHp <= 0) {
-            SceneManager.LoadScene("GameOver");
+            FadeManager.Instance.LoadScene("GameOver", 1f);
         }
         else {
             _hpGauge.DecreaseValue(_currentHp / (float)_maxHp);

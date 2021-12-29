@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     {
         var enemyNum = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemyNum.Length <= 0) {
-            SceneManager.LoadScene("Clear");
+            FadeManager.Instance.LoadScene("Clear", 1f);
         }
     }
 }
