@@ -5,11 +5,14 @@ using NativeUtil;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float _flightTime = 4f;
+    [SerializeField] float _flightTime = 2f;
     protected AudioSource _audioSource;
 
     public BulletType Type { get; set; }
     public Vector3 TargetPos { get; set; }
+
+    const float GRAVITY = -9.8f;
+    const float SPEED_RATE = 1f;
 
     protected void Start()
     {
@@ -30,17 +33,15 @@ public class Bullet : MonoBehaviour
     /// </summary>
     IEnumerator Throw(Vector3 targetPos)
     {
-        var gravity = -9.8f;
-        var speedRate = 1f;
         var startPos = transform.position; // 初期位置
         var diffY = (targetPos - startPos).y; // 始点と終点のy成分の差分
-        var vn = (diffY - gravity * 0.5f * _flightTime * _flightTime) / _flightTime; // 鉛直方向の初速度vn
+        var vn = (diffY - GRAVITY * 0.5f * _flightTime * _flightTime) / _flightTime; // 鉛直方向の初速度vn
 
         // 放物運動
-        for (var t = 0f; t < _flightTime; t += (Time.deltaTime * speedRate))
+        for (var t = 0f; t < _flightTime; t += (Time.deltaTime * SPEED_RATE))
         {
             var p = Vector3.Lerp(startPos, targetPos, t / _flightTime);   //水平方向の座標を求める (x,z座標)
-            p.y = startPos.y + vn * t + 0.5f * gravity * t * t; // 鉛直方向の座標 y
+            p.y = startPos.y + vn * t + 0.5f * GRAVITY * t * t; // 鉛直方向の座標 y
             transform.position = p;
             yield return null; //1フレーム経過
         }
@@ -58,12 +59,6 @@ public class Bullet : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         GetComponent<Renderer>().enabled = false;
         Destroy(gameObject, 1f);
-    }
-
-    enum Owner
-    {
-        Player,
-        Enemy
     }
 }
 

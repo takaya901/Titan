@@ -9792,7 +9792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1456384559844174, guid: 4ecce79a4ee883c4883609b864363345, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1456384559844174, guid: 4ecce79a4ee883c4883609b864363345, type: 3}
       propertyPath: m_TagString
@@ -18547,6 +18547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 1920044721433900, guid: 3c02d55ded52b406fa6ebec02df65c06,
     type: 3}
+  _coolTime: 1
 --- !u!114 &959594324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18559,7 +18560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6cf249e01d3b427faedfd04e83bce0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 2
+  _maxHp: 20
   _hpGauge: {fileID: 1178817168}
   _flushOnDamaged: {fileID: 1722316121}
 --- !u!1 &965702302
@@ -18764,7 +18765,7 @@ PrefabInstance:
     - target: {fileID: 127801418956742041, guid: cebe9bb741f4941af90470a811731266,
         type: 3}
       propertyPath: _hp
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 127801418956742041, guid: cebe9bb741f4941af90470a811731266,
         type: 3}
@@ -20910,7 +20911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1714716464291438, guid: 9092396a09d322a48a87d1785d1bdac4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1714716464291438, guid: 9092396a09d322a48a87d1785d1bdac4, type: 3}
       propertyPath: m_TagString
@@ -25152,7 +25153,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1507496761
 MonoBehaviour:
@@ -29635,7 +29636,7 @@ PrefabInstance:
     - target: {fileID: 6144195840851860591, guid: 0668101ef1f7e4dfebcb46e341f684df,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6144195840851860591, guid: 0668101ef1f7e4dfebcb46e341f684df,
         type: 3}

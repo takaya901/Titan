@@ -6,6 +6,8 @@ using static UnityEngine.Input;
 public class Shooter : MonoBehaviour
 {
     [SerializeField] GameObject _bulletPrefab;
+    [SerializeField] float _coolTime = 1f;
+    bool _isCooling;
 
     void Start()
     {
@@ -21,7 +23,10 @@ public class Shooter : MonoBehaviour
 
     void Shoot()
     {
-        var bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        if (_isCooling) return; //冷却中は撃てない
+
+        var pos = transform.position + Vector3.forward * 0.5f;  //カメラが隠れないように
+        var bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
 
         // レーザー（ray）を飛ばす「起点」と「方向」
         Ray ray = new Ray(transform.position, transform.forward);
@@ -36,5 +41,13 @@ public class Shooter : MonoBehaviour
             Debug.Log("no hit");
             bullet.GetComponent<PlayerBullet>().TargetPos = transform.forward * 30f;
         }
+        StartCoroutine("Cooling");
+    }
+
+    IEnumerator Cooling()
+    {
+        _isCooling = true;
+        yield return new WaitForSeconds(_coolTime);
+        _isCooling = false;
     }
 }
