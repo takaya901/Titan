@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamagable
 {
@@ -21,8 +22,13 @@ public class Player : MonoBehaviour, IDamagable
 
     public void TakeDamage(BulletType bulletType)
     {
-        _currentHp--;
-        _hpGauge.DecreaseValue(_currentHp / (float)_maxHp);
-        _flushOnDamaged.Flush(bulletType);
+        // HPが0になったらゲームオーバー
+        if (--_currentHp <= 0) {
+            SceneManager.LoadScene("GameOver");
+        }
+        else {
+            _hpGauge.DecreaseValue(_currentHp / (float)_maxHp);
+            _flushOnDamaged.Flush(bulletType);
+        }
     }
 }

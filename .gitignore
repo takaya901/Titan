@@ -9,8 +9,10 @@
 .vs/
 
 Assets/Example
+Assets/Fonts
 Assets/Audio
 Assets/AssetStoreTools/
+Assets/Standard Asstes
 Assets/ARDK*/
 Assets/Plugins/IngameDebugConsole
 Assets/Materials/Images

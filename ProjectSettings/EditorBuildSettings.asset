@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Suppression.unity
     guid: ebbc5eb8ea05d4809a25f0be4f29b4a1
+  - enabled: 1
+    path: Assets/Scenes/Clear.unity
+    guid: 61fb8b2c967084032af4a68dfdbd9585
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 7266254b9b7a44ad0818436ba3089802
   m_configObjects: {}
