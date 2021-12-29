@@ -120,7 +120,7 @@ public class Titan : MonoBehaviour, IDamagable
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(3f, 10f));
+            yield return new WaitForSeconds(Random.Range(8f, 10f));
             ThrowStone();
         }
     }

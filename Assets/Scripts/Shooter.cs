@@ -41,7 +41,7 @@ public class Shooter : MonoBehaviour
             Debug.Log("no hit");
             bullet.GetComponent<PlayerBullet>().TargetPos = transform.forward * 30f;
         }
-        StartCoroutine("Cooling");
+        StartCoroutine("Cooling");  //一定時間冷却する
     }
 
     IEnumerator Cooling()
