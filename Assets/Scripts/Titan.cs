@@ -22,6 +22,7 @@ public class Titan : MonoBehaviour, IDamagable
     /// <summary> HPが0になってから死に声再生終わるまでtrue </summary>
     bool _isDead;
     Vector3 _walkDestination;
+    const float FIELD_WIDTH = 30f;
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class Titan : MonoBehaviour, IDamagable
         if (_isDead) return;
         Walk();
 
-        //Move();
+        Move();
     }
 
     /// <summary>
@@ -51,9 +52,9 @@ public class Titan : MonoBehaviour, IDamagable
         // 次の目的地を設定
         if (transform.position == _walkDestination)
         {
-            var targetX = Random.Range(-30f, 30f);
+            var targetX = Random.Range(-FIELD_WIDTH, FIELD_WIDTH);
             _walkDestination = new Vector3(targetX, transform.position.y, transform.position.z);
-            transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
+            //transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
             _anim.SetTrigger("Walk");
             return;
         }
@@ -62,8 +63,11 @@ public class Titan : MonoBehaviour, IDamagable
         if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack") {
             transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
         }
+        // 目的地に向かって移動
         else {
-            transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
+            // 振り向き時と攻撃後にゆっくり目的地を向く
+            var lookRotation = Utils.LookRotationY(transform.position, _walkDestination);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.2f);
             transform.position = Vector3.MoveTowards(transform.position, _walkDestination, Time.deltaTime * _speed);
         }
     }
