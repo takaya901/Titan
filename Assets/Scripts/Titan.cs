@@ -15,8 +15,10 @@ public class Titan : MonoBehaviour, IDamagable
     [SerializeField] GameObject _stonePrefab;
     [SerializeField] BulletType _bulletType;
 
-    Vector2 _touchStart;     //タッチ開始時座標
-    Vector2 _touchEnd;       //タッチ終了時座標
+    Vector2 _touchStart, _touchEnd; //タッチ開始時座標と終了時座標
+
+    Transform _tf;
+    Vector3 _cameraPos;
     Animator _anim;
     AudioSource _screaming;
     /// <summary> HPが0になってから死に声再生終わるまでtrue </summary>
@@ -26,13 +28,12 @@ public class Titan : MonoBehaviour, IDamagable
 
     void Start()
     {
+        _tf = transform;
+        _cameraPos = Camera.main.transform.position;
         _anim = gameObject.GetComponent<Animator>();
         _screaming = GetComponent<AudioSource>();
 
-        _walkDestination = transform.position;
-        // カメラに向くようにY軸のみ回転
-        transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
-
+        _walkDestination = _tf.position;
         StartCoroutine("Attack");
     }
 
@@ -50,25 +51,24 @@ public class Titan : MonoBehaviour, IDamagable
     void Walk()
     {
         // 次の目的地を設定
-        if (transform.position == _walkDestination)
+        if (_tf.position == _walkDestination)
         {
             var targetX = Random.Range(-FIELD_WIDTH, FIELD_WIDTH);
-            _walkDestination = new Vector3(targetX, transform.position.y, transform.position.z);
-            //transform.rotation = Utils.LookRotationY(transform.position, _walkDestination);
+            _walkDestination = new Vector3(targetX, _tf.position.y, _tf.position.z);
             _anim.SetTrigger("Walk");
             return;
         }
 
         // 攻撃アニメーション中は移動しない
         if (_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack") {
-            transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
+            _tf.rotation = Utils.LookRotationY(_tf.position, _cameraPos);
         }
         // 目的地に向かって移動
         else {
             // 振り向き時と攻撃後にゆっくり目的地を向く
-            var lookRotation = Utils.LookRotationY(transform.position, _walkDestination);
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.2f);
-            transform.position = Vector3.MoveTowards(transform.position, _walkDestination, Time.deltaTime * _speed);
+            var lookRotation = Utils.LookRotationY(_tf.position, _walkDestination);
+            _tf.rotation = Quaternion.Lerp(_tf.rotation, lookRotation, 0.1f);
+            _tf.position = Vector3.MoveTowards(_tf.position, _walkDestination, Time.deltaTime * _speed);
         }
     }
 
@@ -103,7 +103,7 @@ public class Titan : MonoBehaviour, IDamagable
                     //throw new ArgumentOutOfRangeException();
             }
 
-            transform.position += diff * _moveSpeed;
+            _tf.position += diff * _moveSpeed;
 
             // 現在の座標を保存
             _touchStart = mousePosition;
@@ -134,8 +134,8 @@ public class Titan : MonoBehaviour, IDamagable
         if (_isDead) return;
 
         _anim.SetTrigger("Attack");
-        transform.rotation = Utils.LookRotationY(transform.position, Camera.main.transform.position);
-        var initPos = transform.position + new Vector3(0f, transform.localScale.y*0.8f, 0f);
+        _tf.rotation = Utils.LookRotationY(_tf.position, _cameraPos);
+        var initPos = _tf.position + new Vector3(0f, transform.localScale.y*0.8f, 0f);
         var stone = Instantiate(_stonePrefab, initPos, Quaternion.identity);
         stone.GetComponent<Stone>().Type = _bulletType;
     }
