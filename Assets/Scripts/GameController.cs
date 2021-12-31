@@ -11,9 +11,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            ShowQuitDialog();
-        }
+        if (Input.GetKeyDown(KeyCode.Escape)) ShowQuitDialog();
 
         var enemyNum = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemyNum.Length <= 0) {

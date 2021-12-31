@@ -24,7 +24,7 @@ public class StartBattle : MonoBehaviour
     IEnumerator Wait()
     {
         _isWaiting = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         _isWaiting = false;
     }
 }
