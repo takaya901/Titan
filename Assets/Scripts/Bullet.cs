@@ -54,8 +54,6 @@ public class Bullet : MonoBehaviour
     /// </summary>
     protected virtual void OnTriggerEnter(Collider other)
     {
-        //gameObject.GetComponent<Renderer>().material = _transparent;
-        //_audioSource.Play();
         GetComponent<Collider>().enabled = false;
         GetComponent<Renderer>().enabled = false;
         Destroy(gameObject, 1f);

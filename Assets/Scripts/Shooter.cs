@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Input;
 
-public class Shooter : MonoBehaviour
+public class Shooter : MonoBehaviour, IPausable
 {
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] float _coolTime = 1f;
+    Transform _tf;
     bool _isCooling;
 
     void Start()
     {
-        
+        _tf = transform;
     }
 
     void Update()
@@ -25,11 +26,11 @@ public class Shooter : MonoBehaviour
     {
         if (_isCooling) return; //冷却中は撃てない
 
-        var pos = transform.position + Vector3.forward * 0.5f;  //カメラが隠れないように
+        var pos = _tf.position + Vector3.forward * 0.5f;  //カメラが隠れないように
         var bullet = Instantiate(_bulletPrefab, pos, Quaternion.identity);
 
         // レーザー（ray）を飛ばす「起点」と「方向」
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(_tf.position, _tf.forward);
         var distance = 100f;
         //Debug.DrawLine(ray.origin, ray.direction * distance, Color.red, 5f);
 
@@ -39,7 +40,7 @@ public class Shooter : MonoBehaviour
         }
         else {
             Debug.Log("no hit");
-            bullet.GetComponent<PlayerBullet>().TargetPos = transform.forward * 30f;
+            bullet.GetComponent<PlayerBullet>().TargetPos = _tf.forward * 30f;
         }
         StartCoroutine("Cooling");  //一定時間冷却する
     }
@@ -49,5 +50,10 @@ public class Shooter : MonoBehaviour
         _isCooling = true;
         yield return new WaitForSeconds(_coolTime);
         _isCooling = false;
+    }
+
+    public void Pause()
+    {
+
     }
 }

@@ -8,6 +8,7 @@ public class StartBattle : MonoBehaviour
 
     void Start()
     {
+        Input.backButtonLeavesApp = true;
         StartCoroutine("Wait");
     }
 
