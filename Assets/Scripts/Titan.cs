@@ -42,7 +42,7 @@ public class Titan : MonoBehaviour, IDamagable
         if (_isDead) return;
         Walk();
 
-        Move();
+        //Move();
     }
 
     /// <summary>
